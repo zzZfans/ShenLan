@@ -1,0 +1,5 @@
+# 项目排除路径
+/front/modularization_pro/node_modules/
+/front/npm_pro/node_modules/
+/front/webpack_pro/node_modules/
+/front/yarn_pro/node_modules/
