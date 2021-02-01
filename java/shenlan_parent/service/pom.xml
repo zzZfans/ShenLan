@@ -17,6 +17,7 @@
 
     <modules>
         <module>service_edu</module>
+        <module>service_oss</module>
     </modules>
 
     <properties>
