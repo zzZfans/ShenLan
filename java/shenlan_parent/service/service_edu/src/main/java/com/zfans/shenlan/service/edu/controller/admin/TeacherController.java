@@ -73,7 +73,7 @@ public class TeacherController {
     }
 
     @ApiOperation("根据 id 获取讲师信息")
-    @PostMapping("get/{id}")
+    @GetMapping("get/{id}")
     public R getById(@ApiParam("讲师 id ") @PathVariable String id) {
         Teacher teacher = teacherService.getById(id);
         return teacher != null ?

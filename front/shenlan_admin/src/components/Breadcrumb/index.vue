@@ -10,51 +10,51 @@
 </template>
 
 <script>
-import pathToRegexp from 'path-to-regexp'
+import pathToRegexp from "path-to-regexp";
 
 export default {
   data() {
     return {
       levelList: null
-    }
+    };
   },
   watch: {
     $route() {
-      this.getBreadcrumb()
+      this.getBreadcrumb();
     }
   },
   created() {
-    this.getBreadcrumb()
+    this.getBreadcrumb();
   },
   methods: {
     getBreadcrumb() {
       let matched = this.$route.matched.filter(item => {
         if (item.name) {
-          return true
+          return true;
         }
-      })
-      const first = matched[0]
-      if (first && first.name !== 'dashboard') {
-        matched = [{ path: '/dashboard', meta: { title: 'Dashboard' }}].concat(matched)
+      });
+      const first = matched[0];
+      if (first && first.name !== "dashboard") {
+        matched = [{ path: "/dashboard", meta: { title: "Dashboard" }}].concat(matched);
       }
-      this.levelList = matched
+      this.levelList = matched;
     },
     pathCompile(path) {
       // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
-      const { params } = this.$route
-      var toPath = pathToRegexp.compile(path)
-      return toPath(params)
+      const { params } = this.$route;
+      var toPath = pathToRegexp.compile(path);
+      return toPath(params);
     },
     handleLink(item) {
-      const { redirect, path } = item
+      const { redirect, path } = item;
       if (redirect) {
-        this.$router.push(redirect)
-        return
+        this.$router.push(redirect);
+        return;
       }
-      this.$router.push(this.pathCompile(path))
+      this.$router.push(this.pathCompile(path));
     }
   }
-}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
