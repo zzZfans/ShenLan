@@ -2,6 +2,7 @@ package com.zfans.shenlan.service.edu.mapper;
 
 import com.zfans.shenlan.service.edu.entity.Chapter;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Zfans
  * @since 2021-01-25
  */
+@Repository
 public interface ChapterMapper extends BaseMapper<Chapter> {
 
 }

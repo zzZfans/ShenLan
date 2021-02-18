@@ -2,6 +2,7 @@ package com.zfans.shenlan.service.base.handler;
 
 import com.zfans.shenlan.common.base.result.R;
 import com.zfans.shenlan.common.base.result.ResultCodeEnum;
+import com.zfans.shenlan.service.base.exception.ShenlanException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -38,5 +39,12 @@ public class GlobalExceptionHandler {
     public R error(HttpMessageNotReadableException e) {
         log.error(e.getMessage(), e.getCause());
         return R.setResult(ResultCodeEnum.JSON_PARSE_ERROR);
+    }
+
+    @ExceptionHandler(ShenlanException.class)
+    @ResponseBody
+    public R error(ShenlanException e) {
+        log.error(String.valueOf(e));
+        return R.error().message(e.getMessage()).code(e.getCode());
     }
 }

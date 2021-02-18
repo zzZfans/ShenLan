@@ -1,6 +1,7 @@
 package com.zfans.shenlan.service.edu.entity;
 
 import java.math.BigDecimal;
+
 import com.zfans.shenlan.service.base.model.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -23,10 +24,10 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("edu_course")
-@ApiModel(value="Course对象", description="课程")
+@ApiModel(value = "Course对象", description = "课程")
 public class Course extends BaseEntity {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "课程讲师ID")
     private String teacherId;
@@ -61,5 +62,9 @@ public class Course extends BaseEntity {
     @ApiModelProperty(value = "课程状态 Draft未发布  Normal已发布")
     private String status;
 
+    // 未发布
+    public static final String COURSE_DRAFT = "Draft";
+    // 已发布
+    public static final String COURSE_NORMAL = "Normal";
 
 }

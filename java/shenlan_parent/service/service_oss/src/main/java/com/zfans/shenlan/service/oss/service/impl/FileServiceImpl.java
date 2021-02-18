@@ -56,4 +56,27 @@ public class FileServiceImpl implements FileService {
         //返回url地址
         return "https://" + bucketname + "." + endpoint + "/" + key;
     }
+
+    @Override
+    public void removeFile(String url) {
+        String endpoint = ossProperties.getEndpoint();
+        String keyid = ossProperties.getKeyid();
+        String keysecret = ossProperties.getKeysecret();
+        String bucketname = ossProperties.getBucketname();
+
+        // 创建OSSClient实例。
+        OSS ossClient = new OSSClientBuilder().build(endpoint, keyid, keysecret);
+
+        // https://shenlan-file.oss-cn-beijing.aliyuncs.com/
+        String host = "https://" + bucketname + "." + endpoint + "/";
+
+        // 删除文件。如需删除文件夹，请将ObjectName设置为对应的文件夹名称。如果文件夹非空，则需要将文件夹下的所有object删除后才能删除该文件夹。
+        String objectName = url.substring(host.length());
+
+        // 删除文件。
+        ossClient.deleteObject(bucketname, objectName);
+
+        // 关闭OSSClient。
+        ossClient.shutdown();
+    }
 }

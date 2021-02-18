@@ -21,6 +21,13 @@ export default {
       method: "delete"
     });
   },
+  batchRemove(idList) {
+    return request({
+      url: "/admin/edu/teacher/batch-remove",
+      method: "delete",
+      data: idList
+    });
+  },
   save(teacher) {
     return request({
       url: "/admin/edu/teacher/save",
@@ -39,6 +46,12 @@ export default {
       url: "/admin/edu/teacher/update",
       method: "put",
       data: teacher
+    });
+  },
+  selectNameListByKey(key) {
+    return request({
+      url: `/admin/edu/teacher/list/name/${key}`,
+      method: "get"
     });
   }
 

@@ -22,10 +22,14 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("edu_course_description")
-@ApiModel(value="CourseDescription对象", description="课程简介")
+@ApiModel(value = "CourseDescription对象", description = "课程简介")
 public class CourseDescription extends BaseEntity {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "讲师ID")
+    @TableId(value = "id", type = IdType.NONE)
+    private String id;
 
     @ApiModelProperty(value = "课程简介")
     private String description;

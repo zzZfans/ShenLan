@@ -32,6 +32,7 @@
         <el-upload
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
+          :on-error="handleAvatarError"
           :before-upload="beforeAvatarUpload"
           class="avatar-uploader"
           action="http://localhost:8120/admin/oss/file/upload?module=avatar">
@@ -114,10 +115,14 @@ export default {
     },
     // 上传成功回调
     handleAvatarSuccess(res) {
-      // console.log(res)
-      this.teacher.avatar = res.data.url;
-      // 强制重新渲染
-      this.$forceUpdate();
+      if (res.success) {
+        // console.log(res)
+        this.teacher.avatar = res.data.url;
+        // 强制重新渲染
+        this.$forceUpdate();
+      } else {
+        this.$message.error("上传失败！（非20000）");
+      }
     },
     // 上传校验
     beforeAvatarUpload(file) {
@@ -131,6 +136,11 @@ export default {
         this.$message.error("上传头像图片大小不能超过 2MB！");
       }
       return isJPG && isLt2M;
+    },
+    // 错误处理
+    handleAvatarError() {
+      // console.log("error");
+      this.$message.error("上传失败！（http失败）");
     }
   }
 };
