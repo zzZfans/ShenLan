@@ -8,6 +8,7 @@ import com.zfans.shenlan.service.edu.entity.vo.CoursePublishVo;
 import com.zfans.shenlan.service.edu.entity.vo.CourseQueryVo;
 import com.zfans.shenlan.service.edu.entity.vo.CourseVo;
 import com.zfans.shenlan.service.edu.service.CourseService;
+import com.zfans.shenlan.service.edu.service.VideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -83,14 +84,17 @@ public class CourseController {
         return R.ok().data("total", total).data("rows", records);
     }
 
+    @Autowired
+    private VideoService videoService;
+
     @ApiOperation("根据ID删除课程")
     @DeleteMapping("remove/{id}")
     public R removeById(
             @ApiParam(value = "课程ID", required = true)
             @PathVariable String id) {
 
-        //TODO 删除视频：VOD
-        //在此处调用vod中的删除视频文件的接口
+        //删除视频：VOD
+        videoService.removeMediaVideoByCourseId(id);
 
         //删除封面：OSS
         courseService.removeCoverById(id);
