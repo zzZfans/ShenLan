@@ -3,17 +3,21 @@ package com.zfans.shenlan.service.edu.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zfans.shenlan.common.base.result.R;
+import com.zfans.shenlan.service.edu.entity.Course;
 import com.zfans.shenlan.service.edu.entity.Teacher;
 import com.zfans.shenlan.service.edu.entity.vo.TeacherQueryVo;
 import com.zfans.shenlan.service.edu.feign.OssFileService;
+import com.zfans.shenlan.service.edu.mapper.CourseMapper;
 import com.zfans.shenlan.service.edu.mapper.TeacherMapper;
 import com.zfans.shenlan.service.edu.service.TeacherService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +34,9 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
 
     @Autowired
     private OssFileService ossFileService;
+
+    @Autowired
+    private CourseMapper courseMapper;
 
     @Override
     public List<Map<String, Object>> selectNameListByKey(String key) {
@@ -54,6 +61,36 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
             }
         }
         return false;
+    }
+
+    /**
+     * 根据讲师id获取讲师详情页数据
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Map<String, Object> selectTeacherInfoById(String id) {
+        //获取讲师信息
+        Teacher teacher = baseMapper.selectById(id);
+        //根据讲师id获取讲师课程
+        List<Course> courseList = courseMapper.selectList(
+                new QueryWrapper<Course>().eq("teacher_id", id)
+        );
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("teacher", teacher);
+        map.put("courseList", courseList);
+        return map;
+    }
+
+    @Override
+    @Cacheable(value = "index:ad", key = "'selectHotTeacher'")
+    public List<Teacher> selectHotTeacher() {
+        QueryWrapper<Teacher> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByAsc("sort");
+        queryWrapper.last("limit 4");
+        return baseMapper.selectList(queryWrapper);
     }
 
     @Override

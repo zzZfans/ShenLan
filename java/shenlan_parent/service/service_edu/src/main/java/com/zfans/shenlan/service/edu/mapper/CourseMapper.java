@@ -1,13 +1,16 @@
 package com.zfans.shenlan.service.edu.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zfans.shenlan.service.base.dto.CourseDto;
 import com.zfans.shenlan.service.edu.entity.Course;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zfans.shenlan.service.edu.entity.vo.CoursePublishVo;
 import com.zfans.shenlan.service.edu.entity.vo.CourseVo;
+import com.zfans.shenlan.service.edu.entity.vo.WebCourseVo;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -19,6 +22,7 @@ import java.util.List;
  * @author Zfans
  * @since 2021-01-25
  */
+@Repository
 public interface CourseMapper extends BaseMapper<Course> {
 
     List<CourseVo> selectPageByCourseQueryVo(
@@ -29,4 +33,8 @@ public interface CourseMapper extends BaseMapper<Course> {
             @Param(Constants.WRAPPER) QueryWrapper<CourseVo> queryWrapper);
 
     CoursePublishVo selectCoursePublishVoById(String id);
+
+    WebCourseVo selectWebCourseVoById(String courseId);
+
+    CourseDto selectCourseDtoById(String courseId);
 }

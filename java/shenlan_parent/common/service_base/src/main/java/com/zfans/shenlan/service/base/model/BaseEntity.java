@@ -23,7 +23,7 @@ import java.util.Date;
 @Accessors(chain = true)
 public class BaseEntity implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "讲师ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)

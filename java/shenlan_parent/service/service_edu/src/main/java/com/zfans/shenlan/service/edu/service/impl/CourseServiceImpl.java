@@ -3,23 +3,22 @@ package com.zfans.shenlan.service.edu.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zfans.shenlan.common.base.result.R;
+import com.zfans.shenlan.service.base.dto.CourseDto;
 import com.zfans.shenlan.service.edu.entity.*;
 import com.zfans.shenlan.service.edu.entity.form.CourseInfoForm;
-import com.zfans.shenlan.service.edu.entity.vo.CoursePublishVo;
-import com.zfans.shenlan.service.edu.entity.vo.CourseQueryVo;
-import com.zfans.shenlan.service.edu.entity.vo.CourseVo;
+import com.zfans.shenlan.service.edu.entity.vo.*;
 import com.zfans.shenlan.service.edu.feign.OssFileService;
 import com.zfans.shenlan.service.edu.mapper.*;
 import com.zfans.shenlan.service.edu.service.CourseService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -191,5 +190,65 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         course.setId(id);
         course.setStatus(Course.COURSE_NORMAL);
         return this.updateById(course);
+    }
+
+    @Override
+    public List<Course> webSelectList(WebCourseQueryVo webCourseQueryVo) {
+
+        QueryWrapper<Course> queryWrapper = new QueryWrapper<>();
+
+        //查询已发布的课程
+        queryWrapper.eq("status", Course.COURSE_NORMAL);
+
+        if (!StringUtils.isEmpty(webCourseQueryVo.getSubjectParentId())) {
+            queryWrapper.eq("subject_parent_id", webCourseQueryVo.getSubjectParentId());
+        }
+
+        if (!StringUtils.isEmpty(webCourseQueryVo.getSubjectId())) {
+            queryWrapper.eq("subject_id", webCourseQueryVo.getSubjectId());
+        }
+
+        if (!StringUtils.isEmpty(webCourseQueryVo.getBuyCountSort())) {
+            queryWrapper.orderByDesc("buy_count");
+        }
+
+        if (!StringUtils.isEmpty(webCourseQueryVo.getCreateTimeSort())) {
+            queryWrapper.orderByDesc("create_time");
+        }
+
+        if (!StringUtils.isEmpty(webCourseQueryVo.getPriceSort())) {
+            if (webCourseQueryVo.getType() == null || webCourseQueryVo.getType() == 1) {
+                queryWrapper.orderByAsc("price");
+            } else {
+                queryWrapper.orderByDesc("price");
+            }
+        }
+
+        return baseMapper.selectList(queryWrapper);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public WebCourseVo selectWebCourseVoById(String id) {
+        //更新课程浏览数
+        Course course = baseMapper.selectById(id);
+        course.setViewCount(course.getViewCount() + 1);
+        baseMapper.updateById(course);
+        //获取课程信息
+        return baseMapper.selectWebCourseVoById(id);
+    }
+
+    @Override
+    @Cacheable(value = "index:ad", key = "'selectHotCourse'")
+    public List<Course> selectHotCourse() {
+        QueryWrapper<Course> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("view_count");
+        queryWrapper.last("limit 8");
+        return baseMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public CourseDto getCourseDtoById(String courseId) {
+        return baseMapper.selectCourseDtoById(courseId);
     }
 }

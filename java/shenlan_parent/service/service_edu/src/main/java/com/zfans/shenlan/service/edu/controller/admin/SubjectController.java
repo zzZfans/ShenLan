@@ -4,7 +4,6 @@ package com.zfans.shenlan.service.edu.controller.admin;
 import com.zfans.shenlan.common.base.result.R;
 import com.zfans.shenlan.common.base.result.ResultCodeEnum;
 import com.zfans.shenlan.service.base.exception.ShenlanException;
-import com.zfans.shenlan.service.edu.entity.vo.SubjectVo;
 import com.zfans.shenlan.service.edu.service.SubjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * <p>

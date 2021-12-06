@@ -10,17 +10,17 @@ Vue.use(Router);
 import Layout from "../views/layout/Layout";
 
 /**
-* hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
-* alwaysShow: true               if set true, will always show the root menu, whatever its child routes length
-*                                if not set alwaysShow, only more than one route under the children
-*                                it will becomes nested mode, otherwise not show the root menu
-* redirect: noredirect           if `redirect:noredirect` will no redirect in the breadcrumb
-* name:'router-name'             the name is used by <keep-alive> (must set!!!)
-* meta : {
+ * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
+ * alwaysShow: true               if set true, will always show the root menu, whatever its child routes length
+ *                                if not set alwaysShow, only more than one route under the children
+ *                                it will becomes nested mode, otherwise not show the root menu
+ * redirect: noredirect           if `redirect:noredirect` will no redirect in the breadcrumb
+ * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * meta : {
     title: 'title'               the name show in submenu and breadcrumb (recommend set)
     icon: 'svg-name'             the icon show in the sidebar,
   }
-**/
+ **/
 // export const constantRouterMap = [
 //   {
 //     path: "/login",
@@ -254,6 +254,57 @@ export const constantRouterMap = [
         name: "CourseChapterEdit",
         component: () => import("@/views/course/form"),
         meta: { title: "编辑大纲" },
+        hidden: true
+      }
+    ]
+  },
+  // 内容管理
+  {
+    path: "/ad",
+    component: Layout,
+    redirect: "/ad/list",
+    name: "Ad",
+    meta: { title: "内容管理" },
+    children: [
+      {
+        path: "list",
+        name: "AdList",
+        component: () => import("@/views/ad/list"),
+        meta: { title: "广告推荐" }
+      },
+      {
+        path: "create",
+        name: "AdCreate",
+        component: () => import("@/views/ad/form"),
+        meta: { title: "添加广告推荐" },
+        hidden: true
+      },
+      {
+        path: "edit/:id",
+        name: "AdEdit",
+        component: () => import("@/views/ad/form"),
+        meta: { title: "编辑广告推荐" },
+        hidden: true
+      },
+
+      {
+        path: "type-list",
+        name: "AdTypeList",
+        component: () => import("@/views/adType/list"),
+        meta: { title: "推荐位" }
+      },
+      {
+        path: "type-create",
+        name: "AdTypeCreate",
+        component: () => import("@/views/adType/form"),
+        meta: { title: "添加推荐位" },
+        hidden: true
+      },
+      {
+        path: "type-edit/:id",
+        name: "AdTypeEdit",
+        component: () => import("@/views/adType/form"),
+        meta: { title: "编辑推荐位" },
         hidden: true
       }
     ]

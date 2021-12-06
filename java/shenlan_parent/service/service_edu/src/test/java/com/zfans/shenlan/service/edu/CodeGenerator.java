@@ -22,6 +22,7 @@ import java.util.ArrayList;
  * @DateTime 2021/01/25 11:44
  */
 public class CodeGenerator {
+
     @Test
     public void genCode() {
 
@@ -36,12 +37,18 @@ public class CodeGenerator {
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("Zfans");
-        gc.setOpen(false); //生成后是否打开资源管理器
-//        gc.setFileOverride(false); //重新生成时文件是否覆盖
-        gc.setServiceName("%sService");	//去掉Service接口的首字母I
-        gc.setIdType(IdType.ASSIGN_ID); //主键策略
-        gc.setDateType(DateType.ONLY_DATE);//定义生成的实体类中日期类型
-        gc.setSwagger2(true);//开启Swagger2模式
+        // 生成后是否打开资源管理器
+        gc.setOpen(false);
+        // // 重新生成时文件是否覆盖
+        // gc.setFileOverride(false);
+        // 去掉 Service 接口的首字母 I
+        gc.setServiceName("%sService");
+        // 主键策略
+        gc.setIdType(IdType.ASSIGN_ID);
+        // 定义生成的实体类中日期类型
+        gc.setDateType(DateType.ONLY_DATE);
+        // 开启 Swagger2 模式
+        gc.setSwagger2(true);
         mpg.setGlobalConfig(gc);
 
         // 3、数据源配置
@@ -65,30 +72,35 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
-        strategy.setTablePrefix(moduleName + "_");//设置表前缀不生成
+        // 数据库表映射到实体的命名策略
+        strategy.setNaming(NamingStrategy.underline_to_camel);
+        // 设置表前缀不生成
+        strategy.setTablePrefix(moduleName + "_");
+        // 数据库表字段映射到实体的命名策略
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        // lombok 模型 @Accessors(chain = true) setter 链式操作
+        strategy.setEntityLombokModel(true);
+        // 逻辑删除字段名
+        strategy.setLogicDeleteFieldName("is_deleted");
+        // 去掉布尔值的 is_ 前缀
+        strategy.setEntityBooleanColumnRemoveIsPrefix(true);
 
-        strategy.setColumnNaming(NamingStrategy.underline_to_camel);//数据库表字段映射到实体的命名策略
-        strategy.setEntityLombokModel(true); // lombok 模型 @Accessors(chain = true) setter链式操作
-
-        strategy.setLogicDeleteFieldName("is_deleted");//逻辑删除字段名
-        strategy.setEntityBooleanColumnRemoveIsPrefix(true);//去掉布尔值的is_前缀
-
-        //自动填充
+        // 自动填充
         TableFill gmtCreate = new TableFill("create_time", FieldFill.INSERT);
         TableFill gmtModified = new TableFill("update_time", FieldFill.INSERT_UPDATE);
         ArrayList<TableFill> tableFills = new ArrayList<>();
         tableFills.add(gmtCreate);
         tableFills.add(gmtModified);
         strategy.setTableFillList(tableFills);
-
-        strategy.setRestControllerStyle(true); //restful api风格控制器
-        strategy.setControllerMappingHyphenStyle(true); //url中驼峰转连字符
+        // restful api 风格控制器
+        strategy.setRestControllerStyle(true);
+        // url 中驼峰转连字符
+        strategy.setControllerMappingHyphenStyle(true);
         mpg.setStrategy(strategy);
 
-        //设置BaseEntity
+        // 设置 BaseEntity
         strategy.setSuperEntityClass("com.zfans.shenlan.service.base.model.BaseEntity");
-        // 填写BaseEntity中的公共字段
+        // 填写 BaseEntity 中的公共字段
         strategy.setSuperEntityColumns("id", "create_time", "update_time");
 
         // 6、执行

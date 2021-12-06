@@ -11,11 +11,11 @@
     <!-- white:白色 -->
     <!-- magenta:洋红 -->
     <property name="CONSOLE_LOG_PATTERN"
-              value="%yellow(%date{yyyy-MM-dd HH:mm:ss}) |%highlight(%-5level) |%blue(%thread) |%blue(%file:%line) |%green(%logger) |%cyan(%msg%n)"/>
+              value="%yellow(%date{yyyy-MM-dd HH:mm:ss}) | %highlight(%-5level)| %blue(%thread) | %blue(%file:%line) | %green(%logger) | %cyan(%msg%n)"/>
 
     <!--文件日志格式-->
     <property name="FILE_LOG_PATTERN"
-              value="%date{yyyy-MM-dd HH:mm:ss} |%-5level |%thread |%file:%line |%logger |%msg%n"/>
+              value="%date{yyyy-MM-dd HH:mm:ss} | %-5level| %thread | %file:%line | %logger | %msg%n"/>
 
     <!--编码-->
     <property name="ENCODING"

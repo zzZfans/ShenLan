@@ -6,6 +6,8 @@ import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.zfans.shenlan.common.base.result.ResultCodeEnum;
 import com.zfans.shenlan.service.base.exception.ShenlanException;
 import com.zfans.shenlan.service.vod.service.VideoService;
@@ -49,7 +51,7 @@ public class VideoServiceImpl implements VideoService {
         UploadStreamResponse response = uploader.uploadStream(request);
 
         String videoId = response.getVideoId();
-        //没有正确的返回videoid则说明上传失败
+        // 没有正确的返回 videoid 则说明上传失败
         if (StringUtils.isEmpty(videoId)) {
             log.error("阿里云上传失败：" + response.getCode() + " - " + response.getMessage());
             throw new ShenlanException(ResultCodeEnum.VIDEO_UPLOAD_ALIYUN_ERROR);
@@ -73,7 +75,7 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public void removeVideoByIdList(List<String> videoIdList) throws ClientException {
 
-        //初始化client对象
+        // 初始化 client 对象
         DefaultAcsClient client = AliyunVodSDKUtils.initVodClient(
                 vodProperties.getKeyid(),
                 vodProperties.getKeysecret());
@@ -87,7 +89,7 @@ public class VideoServiceImpl implements VideoService {
         for (int i = 0; i < size; i++) {
             idListStr.append(videoIdList.get(i));
             if (i == size - 1 || i % 20 == 19) {
-                //支持传入多个视频ID，多个用逗号分隔，最多20个
+                // 支持传入多个视频 ID，多个用逗号分隔，最多 20 个
                 request.setVideoIds(idListStr.toString());
                 client.getAcsResponse(request);
                 idListStr = new StringBuffer();
@@ -95,5 +97,20 @@ public class VideoServiceImpl implements VideoService {
                 idListStr.append(",");
             }
         }
+    }
+
+    @Override
+    public String getPlayAuth(String videoSourceId) throws ClientException {
+        // 初始化 client 对象
+        DefaultAcsClient client = AliyunVodSDKUtils.initVodClient(
+                vodProperties.getKeyid(),
+                vodProperties.getKeysecret());
+
+        GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+        request.setVideoId(videoSourceId);
+
+        GetVideoPlayAuthResponse response = client.getAcsResponse(request);
+
+        return response.getPlayAuth();
     }
 }
