@@ -89,6 +89,13 @@ export default {
       codeText: '获取验证码'
     }
   },
+  mounted() {
+    document.onkeydown = (KeyboardEvent) => {
+      if (KeyboardEvent.key === 'Enter') {
+        this.submitRegister()
+      }
+    }
+  },
   methods: {
     // 获取验证码
     getCodeFun() {

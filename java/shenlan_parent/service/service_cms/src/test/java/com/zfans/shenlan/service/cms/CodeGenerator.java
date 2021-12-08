@@ -85,11 +85,11 @@ public class CodeGenerator {
         strategy.setEntityBooleanColumnRemoveIsPrefix(true);
 
         // 自动填充
-        TableFill gmtCreate = new TableFill("create_time", FieldFill.INSERT);
-        TableFill gmtModified = new TableFill("update_time", FieldFill.INSERT_UPDATE);
+        TableFill createTime = new TableFill("create_time", FieldFill.INSERT);
+        TableFill updateTime = new TableFill("update_time", FieldFill.INSERT_UPDATE);
         ArrayList<TableFill> tableFills = new ArrayList<>();
-        tableFills.add(gmtCreate);
-        tableFills.add(gmtModified);
+        tableFills.add(createTime);
+        tableFills.add(updateTime);
         strategy.setTableFillList(tableFills);
         // restful api 风格控制器
         strategy.setRestControllerStyle(true);

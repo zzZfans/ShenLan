@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * <p>
@@ -104,5 +105,28 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Integer count = baseMapper.selectCount(queryWrapper);
 
         return count > 0;
+    }
+
+    @Override
+    public List<Order> selectByMemberId(String memberId) {
+
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.orderByDesc("create_time");
+        queryWrapper.eq("member_id", memberId);
+
+        return baseMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public boolean removeById(String orderId, String memberId) {
+
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper
+                .eq("id", orderId)
+                .eq("member_id", memberId);
+
+        return this.remove(queryWrapper);
     }
 }

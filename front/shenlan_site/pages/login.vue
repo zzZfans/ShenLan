@@ -60,21 +60,29 @@ export default {
       }
     }
   },
-
+  mounted() {
+    document.onkeydown = (KeyboardEvent) => {
+      if (KeyboardEvent.key === 'Enter') {
+        this.submitLogin()
+      }
+    }
+  },
   methods: {
     // 登录
     submitLogin() {
       // 执行登录
-      loginApi.submitLogin(this.user).then(response => {
-        // 登录成功后将jwtToken写入cookie
-        cookie.set(
-          'shenlan_jwt_token',
-          response.data.token,
-          { domain: 'localhost' })
-        // 跳转到首页
-        window.location.href = '/'
-      })
+      loginApi.submitLogin(this.user)
+        .then(response => {
+          // 登录成功后将 jwtToken 写入 cookie
+          cookie.set(
+            'shenlan_jwt_token',
+            response.data.token,
+            { domain: 'localhost' })
+          // 跳转到首页
+          window.location.href = '/'
+        })
     }
   }
+
 }
 </script>

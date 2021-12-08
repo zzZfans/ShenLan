@@ -187,7 +187,7 @@
                 </li>
                 <li>
                   <aside class="i-article-pic">
-                    <img src="~/assets/photo/article/08.jpg" alt="陈年重回T恤大战：凡客归来">
+                    <img src="~/assets/photo/article/01.jpg" alt="陈年重回T恤大战：凡客归来">
                   </aside>
                   <h3 class="hLh30 txtOf">
                     <a href="/article/1" title="陈年重回T恤大战：凡客归来" class="i-art-title">陈年重回T恤大战：凡客归来</a>

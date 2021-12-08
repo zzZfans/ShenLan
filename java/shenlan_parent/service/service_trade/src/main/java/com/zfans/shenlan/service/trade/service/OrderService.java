@@ -3,6 +3,8 @@ package com.zfans.shenlan.service.trade.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zfans.shenlan.service.trade.entity.Order;
 
+import java.util.List;
+
 /**
  * <p>
  * 订单 服务类
@@ -18,4 +20,8 @@ public interface OrderService extends IService<Order> {
     Order getByOrderId(String orderId, String memberId);
 
     Boolean isBuyByCourseId(String courseId, String memberId);
+
+    List<Order> selectByMemberId(String memberId);
+
+    boolean removeById(String orderId, String memberId);
 }

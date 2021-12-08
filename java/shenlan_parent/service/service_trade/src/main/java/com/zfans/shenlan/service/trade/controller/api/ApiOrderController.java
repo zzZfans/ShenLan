@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -65,6 +66,32 @@ public class ApiOrderController {
         }
         Boolean isBuy = orderService.isBuyByCourseId(courseId, jwtInfo.getId());
         return R.ok().data("isBuy", isBuy);
+    }
+
+    @ApiOperation(value = "获取当前用户订单列表")
+    @GetMapping("auth/list")
+    public R list(HttpServletRequest request) {
+        JwtInfo jwtInfo = JwtUtils.getMemberIdByJwtToken(request);
+        if (jwtInfo == null) {
+            return R.error().message("jwtInfo is null");
+        }
+        List<Order> list = orderService.selectByMemberId(jwtInfo.getId());
+        return R.ok().data("items", list);
+    }
+
+    @ApiOperation(value = "删除订单")
+    @DeleteMapping("auth/remove/{orderId}")
+    public R remove(@PathVariable String orderId, HttpServletRequest request) {
+        JwtInfo jwtInfo = JwtUtils.getMemberIdByJwtToken(request);
+        if (jwtInfo == null) {
+            return R.error().message("jwtInfo is null");
+        }
+        boolean result = orderService.removeById(orderId, jwtInfo.getId());
+        if (result) {
+            return R.ok().message("删除成功");
+        } else {
+            return R.error().message("数据不存在");
+        }
     }
 }
 

@@ -1,9 +1,7 @@
 package com.zfans.shenlan.service.edu.entity;
 
-import com.zfans.shenlan.service.base.model.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.zfans.shenlan.service.base.model.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,7 +20,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("edu_course_collect")
-@ApiModel(value="CourseCollect对象", description="课程收藏")
+@ApiModel(value="CourseCollect 对象", description="课程收藏")
 public class CourseCollect extends BaseEntity {
 
     private static final long serialVersionUID=1L;
