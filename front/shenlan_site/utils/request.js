@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import cookie from 'js-cookie'
-// 创建axios实例
+// 创建 axios 实例
 const service = axios.create({
   baseURL: 'http://localhost:8110',
   timeout: 12000 // 请求超时时间
@@ -11,7 +11,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (cookie.get('shenlan_jwt_token')) {
-      // 则发送后端api请求的时候携带token
+      // 发送后端 api 请求的时候携带 token
       config.headers['token'] = cookie.get('shenlan_jwt_token')
     }
     return config
@@ -25,7 +25,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     /**
-     * code为非20000是抛错 可结合自己业务进行修改
+     * code 为非 20000 是抛错 可结合自己业务进行修改
      */
     const res = response.data
 
@@ -34,6 +34,9 @@ service.interceptors.response.use(
     } else if (res.code === 23004) { // 获取用户信息失败
       // 清除 cookie
       cookie.set('shenlan_jwt_token', '', { domain: 'localhost' })
+      return response.data
+    } else if (res.code === 25000) { // 支付中
+      // 不显示错误信息
       return response.data
     } else { // 其他错误
       Message({

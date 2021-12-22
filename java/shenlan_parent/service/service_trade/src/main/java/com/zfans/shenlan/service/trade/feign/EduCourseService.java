@@ -1,5 +1,6 @@
 package com.zfans.shenlan.service.trade.feign;
 
+import com.zfans.shenlan.common.base.result.R;
 import com.zfans.shenlan.service.base.dto.CourseDto;
 import com.zfans.shenlan.service.trade.feign.fallback.EduCourseServiceFallBackImpl;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -17,4 +18,7 @@ public interface EduCourseService {
 
     @GetMapping(value = "/api/edu/course/inner/get-course-dto/{courseId}")
     CourseDto getCourseDtoById(@PathVariable(value = "courseId") String courseId);
+
+    @GetMapping("/api/edu/course/inner/update-buy-count/{id}")
+    R updateBuyCountById(@PathVariable("id") String id);
 }

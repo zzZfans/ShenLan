@@ -2,6 +2,7 @@ package com.zfans.shenlan.service.trade.controller.api;
 
 
 import com.zfans.shenlan.common.base.result.R;
+import com.zfans.shenlan.common.base.result.ResultCodeEnum;
 import com.zfans.shenlan.common.base.util.JwtInfo;
 import com.zfans.shenlan.common.base.util.JwtUtils;
 import com.zfans.shenlan.service.trade.entity.Order;
@@ -92,6 +93,17 @@ public class ApiOrderController {
         } else {
             return R.error().message("数据不存在");
         }
+    }
+
+    @GetMapping("/query-pay-status/{orderNo}")
+    public R queryPayStatus(@PathVariable String orderNo) {
+        boolean result = orderService.queryPayStatus(orderNo);
+        if (result) {
+            // 支付成功
+            return R.ok().message("支付成功");
+        }
+        // 支付中
+        return R.setResult(ResultCodeEnum.PAY_RUN);
     }
 }
 

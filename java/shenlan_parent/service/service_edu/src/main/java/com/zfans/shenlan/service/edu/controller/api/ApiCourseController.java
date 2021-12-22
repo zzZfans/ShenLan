@@ -67,4 +67,13 @@ public class ApiCourseController {
         CourseDto courseDto = courseService.getCourseDtoById(courseId);
         return courseDto;
     }
+
+    @ApiOperation("根据课程 id 更改销售量")
+    @GetMapping("inner/update-buy-count/{id}")
+    public R updateBuyCountById(
+            @ApiParam(value = "课程id", required = true)
+            @PathVariable String id){
+        courseService.updateBuyCountById(id);
+        return R.ok();
+    }
 }
