@@ -26,7 +26,7 @@ import java.util.List;
  * @since 2021-01-25
  */
 @Api(tags = "课程管理")
-@CrossOrigin //跨域
+// @CrossOrigin //跨域
 @RestController
 @RequestMapping("/admin/edu/course")
 public class CourseController {

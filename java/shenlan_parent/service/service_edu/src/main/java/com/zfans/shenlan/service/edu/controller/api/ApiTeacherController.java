@@ -7,7 +7,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +19,7 @@ import java.util.Map;
  * @Author Zfans
  * @DateTime 2021/03/09 11:51
  */
-@CrossOrigin
+// @CrossOrigin // 在 网关层 配置了跨域，这里的处理是多余的
 @Api(tags = "讲师")
 @RestController
 @RequestMapping("/api/edu/teacher")

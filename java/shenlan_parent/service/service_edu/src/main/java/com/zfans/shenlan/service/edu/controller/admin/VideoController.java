@@ -3,7 +3,6 @@ package com.zfans.shenlan.service.edu.controller.admin;
 
 import com.zfans.shenlan.common.base.result.R;
 import com.zfans.shenlan.service.edu.entity.Video;
-import com.zfans.shenlan.service.edu.feign.VodMediaService;
 import com.zfans.shenlan.service.edu.service.VideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @author Zfans
  * @since 2021-01-25
  */
-@CrossOrigin
+// @CrossOrigin
 @Api(tags = "课时管理")
 @RestController
 @RequestMapping("/admin/edu/video")

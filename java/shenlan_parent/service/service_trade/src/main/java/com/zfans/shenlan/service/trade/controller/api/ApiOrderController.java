@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/trade/order")
 @Api(description = "网站订单管理")
-@CrossOrigin // 跨域
+// @CrossOrigin // 跨域
 @Slf4j
 public class ApiOrderController {
 

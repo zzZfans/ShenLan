@@ -34,8 +34,8 @@
           :on-success="handleAvatarSuccess"
           :on-error="handleAvatarError"
           :before-upload="beforeAvatarUpload"
-          class="avatar-uploader"
-          action="http://localhost:8120/admin/oss/file/upload?module=avatar">
+          :action="BASE_API+'/admin/oss/file/upload?module=avatar'"
+          class="avatar-uploader">
           <img v-if="teacher.avatar" :src="teacher.avatar" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"/>
         </el-upload>
@@ -62,7 +62,8 @@ export default {
         sort: 0,
         level: 1
       },
-      saveBtnDisabled: false // 保存按钮是否禁用，防止表单重复提交
+      saveBtnDisabled: false, // 保存按钮是否禁用，防止表单重复提交
+      BASE_API: process.env.BASE_API
     };
   },
   // 页面渲染成功

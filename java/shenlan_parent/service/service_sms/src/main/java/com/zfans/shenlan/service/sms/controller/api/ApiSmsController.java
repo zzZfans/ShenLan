@@ -12,7 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/api/sms")
 @Api(tags = "短信管理")
-@CrossOrigin // 跨域
+// @CrossOrigin // 跨域
 @Slf4j
 public class ApiSmsController {
 

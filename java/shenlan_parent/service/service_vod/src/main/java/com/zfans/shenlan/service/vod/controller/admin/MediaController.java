@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +20,7 @@ import java.util.List;
  * @DateTime 2021/03/02 00:28
  */
 @Api(tags = "阿里云视频点播")
-@CrossOrigin //跨域
+// @CrossOrigin //跨域
 @RestController
 @RequestMapping("/admin/vod/media")
 @Slf4j

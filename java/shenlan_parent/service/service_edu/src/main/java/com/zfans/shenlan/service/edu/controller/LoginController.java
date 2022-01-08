@@ -1,7 +1,10 @@
 package com.zfans.shenlan.service.edu.controller;
 
 import com.zfans.shenlan.common.base.result.R;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @ClassName LoginController
@@ -9,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @Author Zfans
  * @DateTime 2021/01/28 22:20
  */
-@CrossOrigin
+// @CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class LoginController {

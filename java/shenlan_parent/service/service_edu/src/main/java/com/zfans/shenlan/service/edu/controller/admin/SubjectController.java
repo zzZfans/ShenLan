@@ -23,7 +23,7 @@ import java.io.InputStream;
  * @author Zfans
  * @since 2021-01-25
  */
-@CrossOrigin // 允许跨域
+// @CrossOrigin // 允许跨域
 @Api(tags = "课程分类管理")
 @Slf4j
 @RestController

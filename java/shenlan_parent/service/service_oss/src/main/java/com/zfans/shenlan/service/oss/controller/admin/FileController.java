@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @DateTime 2021/02/01 23:15
  */
 @Api(tags = "阿里云文件管理")
-@CrossOrigin //跨域
+// @CrossOrigin //跨域
 @RestController
 @RequestMapping("/admin/oss/file")
 @Slf4j

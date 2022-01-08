@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @DateTime 2021/3/21 18:27
  */
 // 解决跨域问题
-@CrossOrigin
+// @CrossOrigin
 @Api(tags = "广告推荐")
 @RestController
 @RequestMapping("/api/cms/ad")

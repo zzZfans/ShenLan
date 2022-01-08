@@ -18,7 +18,7 @@ import java.util.List;
  * @Author 凡森
  * @Date 2021/12/8
  */
-@CrossOrigin
+// @CrossOrigin
 @RestController
 @RequestMapping("/api/edu/course-collect")
 @Slf4j

@@ -23,7 +23,7 @@ export default {
   },
   getPlayAuth(vid) {
     return request({
-      baseURL: 'http://localhost:8130',
+      // baseURL: 'http://localhost:8130', // 配置了网关就不需要指定 URL 了
       url: `/api/vod/media/get-play-auth/${vid}`,
       method: 'get'
     })

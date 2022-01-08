@@ -13,7 +13,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.Map;
  * @author Zfans
  * @since 2021-01-25
  */
-@CrossOrigin // 允许跨域
+// @CrossOrigin // 允许跨域
 @Api(tags = "讲师管理")
 @RestController
 @RequestMapping("/admin/edu/teacher")

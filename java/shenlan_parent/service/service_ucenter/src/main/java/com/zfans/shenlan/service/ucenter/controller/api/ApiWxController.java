@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,7 +28,7 @@ import java.util.UUID;
  * @Author Zfans
  * @DateTime 2021/11/26 19:42
  */
-@CrossOrigin
+// @CrossOrigin
 @Controller // 这里没有配置 @RestController
 @RequestMapping("/api/ucenter/wx")
 @Slf4j

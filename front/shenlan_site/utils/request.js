@@ -3,7 +3,7 @@ import { Message } from 'element-ui'
 import cookie from 'js-cookie'
 // 创建 axios 实例
 const service = axios.create({
-  baseURL: 'http://localhost:8110',
+  baseURL: 'http://localhost:9110',
   timeout: 12000 // 请求超时时间
 })
 
@@ -38,6 +38,8 @@ service.interceptors.response.use(
     } else if (res.code === 25000) { // 支付中
       // 不显示错误信息
       return response.data
+    } else if (res.code === 28004) { // 鉴权失败
+      window.location.href = '/login'
     } else { // 其他错误
       Message({
         message: res.message || 'error',

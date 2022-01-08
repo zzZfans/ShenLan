@@ -34,7 +34,7 @@
       <div class="more-sign">
         <h6>社交帐号登录</h6>
         <ul>
-          <li><a id="weixin" class="weixin" href="http://localhost:8160/api/ucenter/wx/login"><i
+          <li><a id="weixin" class="weixin" href="http://localhost:9110/api/ucenter/wx/login"><i
             class="iconfont icon-weixin"/></a></li>
           <li><a id="qq" class="qq" target="_blank" href="#"><i class="iconfont icon-qq"/></a></li>
         </ul>
@@ -78,8 +78,15 @@ export default {
             'shenlan_jwt_token',
             response.data.token,
             { domain: 'localhost' })
-          // 跳转到首页
-          window.location.href = '/'
+
+          // 上一页是否是注册页
+          if (document.referrer.indexOf('register') !== -1) {
+            // 跳转到首页
+            window.location.href = '/'
+          } else {
+            // 返回上一页
+            history.go(-1)
+          }
         })
     }
   }
