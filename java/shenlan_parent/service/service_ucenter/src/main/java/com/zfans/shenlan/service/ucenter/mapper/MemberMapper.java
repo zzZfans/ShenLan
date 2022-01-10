@@ -12,5 +12,5 @@ import com.zfans.shenlan.service.ucenter.entity.Member;
  * @since 2021-03-25
  */
 public interface MemberMapper extends BaseMapper<Member> {
-
+    Integer selectRegisterNumByDay(String day);
 }
