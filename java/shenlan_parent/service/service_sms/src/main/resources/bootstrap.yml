@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: service-sms # nacos 以此为识别依据
+  profiles:
+    active: dev # 环境标识，test、prod 等
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848 # nacos 中心地址
+        file-extension: yaml # 配置文件格式，如果是 properties 文件则不用配置此项
+        namespace: 666 # namespace -> name or name-active 匹配
