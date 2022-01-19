@@ -18,7 +18,7 @@
           :on-success="fileUploadSuccess"
           :on-error="fileUploadError"
           :limit="1"
-          action="http://127.0.0.1:8110/admin/edu/subject/import"
+          action="http://127.0.0.1:9110/admin/edu/subject/import"
           name="file"
           accept="application/vnd.ms-excel">
           <el-button
