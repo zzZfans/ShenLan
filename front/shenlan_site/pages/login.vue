@@ -85,7 +85,7 @@ export default {
             window.location.href = '/'
           } else {
             // 返回上一页
-            history.go(-1)
+            window.history.back()
           }
         })
     }
