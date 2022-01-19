@@ -83,7 +83,7 @@
 
 # 前端相关技术
 
-系统前端部分，使用主流的前端框架 `Vue`，使用 `ES6` 的开发规范，采用模块化的开发模式，搭建页面环境使用了 `Nuxt` 框架和 `vue-admin-template` 模板，使用 `Element` 进行页面布局。前端环境中使用 `npm` 进行依赖管理，使用 `Babel` 进行代码转换，使用 `webpack` 进行静态资源的打包，采用 `Axios` 进行 `AJAX` 请求调用，使用 `ECharts` 实现数据的可视化。
+系统前端部分，使用主流的前端框架 `Vue`，使用 `ES6` 的开发规范，采用模块化的开发模式，搭建页面环境使用了 `Nuxt` 框架和 `vue-admin-template` 模板，使用 `Element` 进行页面布局。前端环境中使用 `yarn` 进行依赖管理，使用 `Babel` 进行代码转换，使用 `webpack` 进行静态资源的打包，采用 `Axios` 进行 `AJAX` 请求调用，使用 `ECharts` 实现数据的可视化。
 
 # 本地启动运行
 
@@ -92,15 +92,11 @@
 两个前端，分别 clone 后，执行命令
 
 ```bash
-npm install
-npm run dev
+yarn install
+yarn run dev
 ```
 
-可能会出现安装 sass 失败的问题，有可能需要 python 环境，有可能 node、npm 版本过低，有可能需要指定一下淘宝镜像。
-
-```bash
-npm i node-sass --sass_binary_site=https://npm.taobao.org/mirrors/node-sass/
-```
+可能会出现安装 sass 失败的问题，有可能需要 python 环境，有可能 node、yarn 版本过低，有可能需要指定一下淘宝镜像。
 
 `nuxt.config.js` 文件可以配置一些基本的网站信息。
 
@@ -191,8 +187,8 @@ oss、vod、sms、ucenter、trade 服务中都涉及到了 Key 和 Secret，请�
 
 shenlan_admin 为后台，shenlan_site 为前台，分别：
 
-- npm install
-- npm run dev
+- yarn install
+- yarn run dev
 
 ### 后台启动
 
