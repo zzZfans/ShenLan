@@ -1,0 +1,20 @@
+server:
+  port: 8120 # 服务端口
+
+spring:
+  profiles:
+    active: dev # 环境设置
+  application:
+    name: service-oss # 服务名
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos 服务地址
+
+aliyun:
+  oss:
+    endpoint: 666
+    keyid: 666
+    keysecret: 666
+    # bucket 可以在控制台创建，也可以使用 java 代码创建，注意先测试 bucket 是否已被占用
+    bucketname: 666

@@ -1,0 +1,66 @@
+server:
+  port: 8110 # 服务端口
+  tomcat:
+    max-threads: 10 # tomcat 的最大并发值修改为 10,默认是 200
+
+spring:
+  profiles:
+    active: dev # 环境设置
+  application:
+    name: service-edu # 服务名
+  datasource: # mysql 数据库连接
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shenlan_edu?serverTimezone=GMT%2B8
+    username: username
+    password: password
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos 服务地址
+    sentinel:
+      transport:
+        port: 8081 # 跟控制台交流的端口，随意指定一个未使用的端口即可
+        dashboard: localhost:8080 # 指定控制台服务的地址
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    password: password # 默认为空
+    lettuce:
+      pool:
+        max-active: 20  # 最大连接数，负值表示没有限制，默认 8
+        max-wait: -1    # 最大阻塞等待时间，负值表示没限制，默认 -1
+        max-idle: 8     # 最大空闲连接，默认 8
+        min-idle: 0     # 最小空闲连接，默认 0
+
+# mybatis 日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:com/zfans/shenlan/service/edu/mapper/xml/*.xml
+
+## 设置日志级别
+#logging:
+#  level:
+#    root: info # 默认
+
+#service-oss: # 调用的提供者的名称
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+ribbon:
+  MaxAutoRetries: 0 # 同一实例最大重试次数，不包括首次调用，默认 0
+  MaxAutoRetriesNextServer: 1 # 重试其他实例的最大重试次数，不包括首次所选的 server，默认 1
+  ConnectTimeout: 5000 # 连接建立的超时时长，默认 1 秒
+  ReadTimeout: 5000 # 处理请求的超时时间，默认为 1 秒
+
+logging:
+  level:
+    com.zfans.shenlan.service.edu.feign.OssFileService: debug # 以什么级别监控哪个接口
+
+feign:
+  sentinel:
+    enabled: true

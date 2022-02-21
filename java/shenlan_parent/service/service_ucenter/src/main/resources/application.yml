@@ -1,0 +1,47 @@
+server:
+  port: 8160 # 服务端口
+
+spring:
+  profiles:
+    active: dev # 环境设置
+  application:
+    name: service-ucenter # 服务名
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos 服务地址
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    password: password # 默认为空
+    lettuce:
+      pool:
+        max-active: 20  # 最大连接数，负值表示没有限制，默认 8
+        max-wait: -1    # 最大阻塞等待时间，负值表示没限制，默认 -1
+        max-idle: 8     # 最大空闲连接，默认 8
+        min-idle: 0     # 最小空闲连接，默认 0
+
+  datasource: # mysql 数据库连接
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shenlan_ucenter?serverTimezone=GMT%2B8
+    username: username
+    password: password
+  jackson: # 返回 json 的全局时间格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # mybatis 日志
+  mapper-locations: classpath:com/zfans/shenlan/service/ucenter/mapper/xml/*.xml
+
+# 微信登录
+wx:
+  open:
+    # 微信开放平台 appid
+    appId: 666
+    # 微信开放平台 appsecret
+    appSecret: 666
+    # 微信开放平台 重定向 url（域名需要在微信开放平台配置）
+    redirectUri: 666
